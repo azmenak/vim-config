@@ -1,0 +1,53 @@
+colorscheme default
+
+"Prevents 'x' from overriding default register, throws deleted char into
+"blackhole reg
+noremap x "_x
+
+"Save sessions with .vis extension
+map <leader>s :mksession!  session.vis<CR>
+
+"Automatically source vim sessions so I can open them with the finder
+autocmd BufRead *.vis so %
+"Show indent guides the super lazy way
+autocmd BufRead * IndentGuidesEnable
+"Jump to last cursor postition unless invalid
+autocmd BufReadPost *
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \   exe "normal g`\"" |
+  \ endif
+
+"Load our custom keymap
+if filereadable(expand("~/.vimconfig/.vimrc.keymap"))
+  source ~/.vimconfig/.vimrc.keymap
+endif
+
+"Load small custom functions into vim
+if filereadable(expand("~/.vimconfig/.vimrc.functions"))
+  source ~/.vimconfig/.vimrc.functions
+endif
+
+"Ingore files chen searching/loading etc.
+"Ingore coffeescript map files
+set wildignore+=*.map,*/public/*,*/tmp/*,*/doc/*,*/node_modules/*,*/build/*
+
+"Prevent intdent guides from showing in nerdtree
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+
+let g:syntastic_enable_signs=1
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+
+autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+
+augroup reload_vimrc " {
+  autocmd!
+    autocmd BufWritePost $MYVIMRC+".after" source $MYVIMRC
+augroup END " }
+
+autocmd VimEnter * xunmap <leader>nr
+autocmd VimEnter * nunmap <leader>nr
+
+let g:airline#extensions#branch#enabled = 0
+
+let g:jsx_ext_required = 1
