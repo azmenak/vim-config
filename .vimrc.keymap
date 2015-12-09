@@ -12,7 +12,7 @@ map <leader>cc :e ~/.gvim/.gvimrc.after<CR>
 "Shortcuts for current projects
 map <leader>dev :cd ~/Developer<cr>
 map <leader>vh :cd ~/Developer/vidhub<cr>
-map <leader>bv :cd ~/Developer/BookVibe<cr>
+map <leader>rx :cd ~/Developer/realstax-consumer-frontend<cr>
 
 "Re-add the jumo commands
 nnoremap <c-]> :CtrlPtjump<cr>
